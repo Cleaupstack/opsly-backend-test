@@ -33,3 +33,18 @@ This should be a quick little task, but the client is paying us A Billion dollar
 Don't forget to `git push` regularly.
 
 Have fun!
+
+
+## How to Run:
+```
+./gradlew bootJar
+curl localhost:8080
+```
+
+## For docker build
+```
+./gradlew bootJar
+
+docker build -t demo .
+docker run  --publish=3000:3000 demo
+```
