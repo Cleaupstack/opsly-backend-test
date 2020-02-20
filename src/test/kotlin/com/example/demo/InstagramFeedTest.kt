@@ -1,4 +1,4 @@
-import com.example.demo.integration.FacebookFeed
+import com.example.demo.integration.InstagramFeed
 import io.mockk.every
 import io.mockk.mockk
 import okhttp3.OkHttpClient
@@ -9,26 +9,23 @@ import okhttp3.ResponseBody.Companion.toResponseBody
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 
-class FaceBookFeedTest {
-
+class InstagramFeedTest {
     var mockClient = mockk<OkHttpClient>();
-    var facebookFeed = FacebookFeed("http://localhost:9000", mockClient)
+    var instagramFeed = InstagramFeed("http://localhost:9000", mockClient)
     val request = Request.Builder().url("http://localhost:9000").build()
 
     @Test
     fun `should return the response data on success`() {
-
         every { mockClient.newCall(any()).execute() } returns
                 Response.Builder().code(200).request(request)
                         .protocol(Protocol.HTTP_2)
                         .message("")
-                        .body("""[{"name":"jack","status":"i am a cat"}]""".toResponseBody()).build()
+                        .body("""[{"username":"simon","picture":"cat"}]""".toResponseBody()).build()
 
-        val result = facebookFeed.getFeeds()
-
+        val result = instagramFeed.getFeeds()
         assertThat(result.size).isEqualTo(1)
-        assertThat(result[0].name).isEqualTo("jack")
-        assertThat(result[0].status).isEqualTo("i am a cat")
+        assertThat(result[0].username).isEqualTo("simon")
+        assertThat(result[0].picture).isEqualTo("cat")
     }
 
     @Test
@@ -37,10 +34,10 @@ class FaceBookFeedTest {
                 Response.Builder().code(500)
                         .request(request)
                         .protocol(Protocol.HTTP_2)
-                        .message("").body("".toResponseBody()).build()
+                        .message("")
+                        .body("".toResponseBody()).build()
 
-        val result = facebookFeed.getFeeds()
-
+        val result = instagramFeed.getFeeds()
         assertThat(result.size).isEqualTo(0)
     }
 }
