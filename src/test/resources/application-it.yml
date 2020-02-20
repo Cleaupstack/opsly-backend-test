@@ -1,0 +1,9 @@
+server:
+  port: 5000
+integration:
+  facebook:
+    url:  http://localhost:9000/facebook
+  twitter:
+    url: http://localhost:9000/twitter
+  instagram:
+    url: http://localhost:9000/instagram

@@ -28,6 +28,8 @@ dependencies {
     implementation group:  'com.squareup.okhttp3', name :'okhttp', version: '4.4.0'
     testImplementation "io.mockk:mockk:1.9.2"
     testImplementation "com.squareup.okhttp3:mockwebserver:4.4.0"
+    testCompile group: 'org.springframework.cloud', name: 'spring-cloud-contract-wiremock', version: '2.2.1.RELEASE'
+
 }
 
 test {
